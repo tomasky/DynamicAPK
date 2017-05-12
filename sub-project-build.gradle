@@ -174,6 +174,7 @@ task obfuscateRelease(type:proguard.gradle.ProGuardTask, dependsOn:'compileRelea
 
 task dexRelease (type:Exec){
     inputs.file "${buildDir}/intermediates/classes"
+    inputs.file "${buildDir}/../libs"
     outputs.file "${buildDir}/intermediates/dex/${project.name}_dex.zip"
     workingDir buildDir
     executable sdk.dex
@@ -182,6 +183,8 @@ task dexRelease (type:Exec){
     argv << '--dex'
     argv << "--output=${buildDir}/intermediates/dex/${project.name}_dex.zip"
     argv << "${buildDir}/intermediates/classes"
+    argv << "${buildDir}/../libs"
+
 
     args = argv
 }
